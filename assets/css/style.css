@@ -432,7 +432,7 @@ a {
 }
 @media not all and (pointer: coarse) {
   a:hover {
-    color: #664efd;
+    color: #fd4e4e;
   }
 }
 
@@ -891,7 +891,7 @@ a {
 .underlined:after {
   width: 100%;
   height: 2px;
-  background-color: #664efd;
+  background-color: #fd4e4e;
   bottom: -5px;
   right: -25px;
 }
@@ -1321,12 +1321,12 @@ ol {
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: #26306a;
+    color: #6a2626;
     border-bottom: 1px solid rgba(102, 78, 253, 0.05);
   }
   .menu li .submenu li a:hover,
   .menu li .submenu li a.active {
-    background: #664efd;
+    background: #fd4e4e;
     padding-left: 22px;
     color: #fff;
   }
@@ -1384,7 +1384,7 @@ ol {
     font-size: 15px;
     text-transform: capitalize;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: #26306a;
+    color: #6a2626;
   }
   .menu li a:hover {
     background: rgba(233, 230, 255, 0.6);
@@ -1575,7 +1575,7 @@ ol {
   border-radius: 5px;
 }
 .wallet-modal .wallet__list-item:hover a {
-  border-color: #664efd;
+  border-color: #fd4e4e;
 }
 
 /*============= wallet modal end=============*/
@@ -2277,7 +2277,7 @@ ol {
   box-shadow: none;
 }
 .contact__form .default-btn:hover {
-  background-color: #664efd;
+  background-color: #fd4e4e;
   color: #fff;
 }
 
@@ -2380,7 +2380,7 @@ ol {
   transition: all 0.3s ease;
 }
 .footer__social-item a:hover {
-  color: #664efd;
+  color: #fd4e4e;
 }
 .footer__social-item a:hover svg {
   -webkit-transform: translateY(-3px);
@@ -2413,11 +2413,11 @@ ol {
   padding: 20px;
 }
 .footer__copyright a {
-  color: #664efd;
+  color: #fd4e4e;
   font-weight: 500;
 }
 .footer__copyright a:hover {
-  color: #219cfc;
+  color: #fc2121;
 }
 
 .default-btn {
@@ -2447,10 +2447,10 @@ ol {
   text-transform: capitalize;
 }
 .default-btn span {
-  background-color: #450009;
+  background-color: #000000;
   color: inherit;
   padding: 1rem 1.5rem;
-  border-radius: 6px;
+  border-radius: 50px;
   width: 100%;
   height: 100%;
   transition: 300ms;
@@ -2540,7 +2540,7 @@ ol {
 .loader::before {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(0deg, #664efd 0%, #219cfc 100%);
+  background-image: linear-gradient(0deg, #fd4e4e 0%, #fc2121 100%);
   animation: loader 0.5s infinite linear;
 }
 

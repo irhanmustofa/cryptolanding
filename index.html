@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from template.discretedev.com/html/discrypto-demo/discrypto-light/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Dec 2023 08:57:29 GMT -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +28,76 @@
 
     <!-- main css for template -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Styles -->
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Chart code -->
+    <script>
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            var chart = am4core.create("chartdiv", am4charts.PieChart3D);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+            chart.legend = new am4charts.Legend();
+
+            chart.data = [
+                {
+                    country: "OPERATIONAL",
+                    litres: 1
+                },
+                {
+                    country: "INSTANT CHARITY (locked)",
+                    litres: 5
+                },
+                {
+                    country: "FAIRLUNCH & PUBLIC",
+                    litres: 60,
+                },
+                {
+                    country: "MARKETING (locked)",
+                    litres: 4
+                },
+                {
+                    country: "CEX LIQUIDITY (locked)",
+                    litres: 30
+                },
+            ];
+
+            var series = chart.series.push(new am4charts.PieSeries3D());
+            series.dataFields.value = "litres";
+            series.dataFields.category = "country";
+
+            // Memberikan warna yang berbeda untuk setiap kategori
+            // series.slices.template.fill = am4core.color("#db2d43"); // Default warna merah
+
+            // Atur warna berbeda untuk setiap kategori sesuai dengan urutan data
+            series.colors.list = [
+                am4core.color("#000"),
+                am4core.color("#FFD699"),
+                am4core.color("#db2d43"),
+                am4core.color("#5e913c"),
+                am4core.color("#ee7181"),
+            ];
+
+        }); // end am4core.ready()
+    </script>
 </head>
 
 <body>
@@ -55,12 +126,6 @@
                         <ul class="menu">
                             <li>
                                 <a class="menu__link" href="#home">Home</a>
-                                <ul class="submenu">
-                                    <li><a href="https://template.discretedev.com/html/discrypto-demo/discrypto/index.html">Home 1</a></li>
-                                    <li><a href="https://template.discretedev.com/html/discrypto-demo/discrypto/index-2.html">Home 2</a></li>
-                                    <li><a href="index.html">Home 1 light</a></li>
-                                    <li><a href="index-2.html">Home 2 light</a></li>
-                                </ul>
                             </li>
                             <li> <a class="menu__link" href="#about">About Us</a> </li>
                             <li> <a class="menu__link" href="#service">Services</a></li>
@@ -96,9 +161,10 @@
                         <div class="banner__content text-center" data-aos="fade-right" data-aos-duration="1000">
 
                             <h1><span class="color--theme-color">$PLSTN</span> CRYPTO FOR PALESTINE</h1>
-                            <p>Lorem Ipsum is simply dummy text of the printing typesetting
-                                industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s, when an unknown</p>
+                            <p>$PLSTN Was Created By The Cryptocurrency Community To Devote Concern To The Palestinian
+                                Community, We Have The Principle
+                                That No Matter How Little Of Our Concern Will Mean Much To Them</p>
+                            <p><b>#FROM COMMUNITY FOR HUMANITY</b></p>
                             <a href="#about" class="default-btn"><span>Explore more</span></a>
                         </div>
                     </div>
@@ -117,44 +183,24 @@
                 <div class="row flex-lg-row-reverse g-5 align-items-center">
                     <div class="col-lg-6">
                         <div class="section-header">
-                            <h2>The Most Trusted <span class="color--theme-color">Crypto </span>
-                                Platform</h2>
+                            <h2>CRYPTO FOR <span class="color--theme-color">PALESTINE </span>
+                                VISION</h2>
                         </div>
                         <div class="about__content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet corrupti blanditiis aut ea
-                                labore explicabo est officiis eligendi quos vero! Lorem ipsum, dolor sit amet
-                                consec tetur adipisicing elit. Ab, officiis!.</p>
-                            <ul class="about__list">
-                                <li class="about__list-item">
-                                    <div class="about__list-icon">
-                                        <img src="assets/images/about/icon/fingerprint.svg" alt="fingerprint Icon">
-                                    </div>
-                                    <div class="about__list-content">
-                                        <p>Secure Storage</p>
-                                    </div>
-                                </li>
-                                <li class="about__list-item">
-                                    <div class="about__list-icon">
-                                        <img src="assets/images/about/icon/house.svg" alt="house Icon">
-                                    </div>
-                                    <div class="about__list-content">
-                                        <p>Protected by insurance</p>
-                                    </div>
-                                </li>
-                                <li class="about__list-item">
-                                    <div class="about__list-icon">
-                                        <img src="assets/images/about/icon/Setting.svg" alt="Setting Icon">
-                                    </div>
-                                    <div class="about__list-content">
-                                        <p>Customize cryptocurrency</p>
-                                    </div>
-                                </li>
-                            </ul>
+                            <p>$PLSTN Bridging Humanity And Peace Through The Blockchain We Aim To Use The Blockchain To
+                                Facilitate Trust And
+                                Cooperation Among Communities In Order To Help Palestinians Affected By The Impact Of
+                                Ongoing And Endless Conflict, The
+                                $PLSTN Aims To Bridge Gaps And Promote Peace By Providing The Tools And Resources That
+                                Palestinian Citizens Need To Work
+                                Together And Fight For Firm Peace For A Brighter Future.</p>
+
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="about__thumb">
-                            <img src="assets/images/about/02.png" alt="about image">
+                            <img src="assets/images/about/about.png" class="img-fluid" style="border-radius: 25px;"
+                                alt="about image">
                         </div>
                     </div>
                 </div>
@@ -173,22 +219,70 @@
                     <h3 class="color__white-color">Our
                         Partners</h3>
                 </div>
+                <style>
+                    .partner__slider img {
+                        height: 100px;
+                        /* Sesuaikan tinggi gambar sesuai kebutuhan */
+                        width: auto;
+                        /* Atur lebar otomatis agar gambar tetap proporsional */
+                    }
+                </style>
                 <div class="partner__content">
                     <div class="partner__slider">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <div class="partner__item">
-                                    <img src="assets/images/partner/01.png" alt="partner Image">
+                                <div class="">
+                                    <img src="assets/images/patnership/binance.png" alt="partner Image">
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <div class="partner__item">
-                                    <img src="assets/images/partner/02.png" alt="partner Image">
+                                <div class="">
+                                    <img src="assets/images/patnership/cg.png" alt="partner Image">
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <div class="partner__item">
-                                    <img src="assets/images/partner/03.png" alt="partner Image">
+                                <div class="">
+                                    <img src="assets/images/patnership/coinmarket-cap.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/dextools.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/dexview.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/pancakeswap.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/poocoin.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/taskon.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/TRUSTWALLET.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/unicef.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/wfp.png" alt="partner Image">
                                 </div>
                             </div>
                         </div>
@@ -211,91 +305,64 @@
             </div>
             <div class="feature__wrapper">
                 <div class="row g-4">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="feature__item">
                             <div class="feature__item-inner">
                                 <div class="feature__item-thumb">
-                                    <i class="fa-solid fa-vault fa-5x"></i>
+                                    <i class="fa-solid fa-file-signature fa-5x"></i>
                                 </div>
                                 <div class="feature__item-content">
-                                    <h4>Safe & Secure</h4>
-                                    <p>Lorem ipsum dolor sit amet, conse ctetur adipisir cing elit. Totam, etem aliquam
-                                        liq.
+                                    <h4>Contract Renounced</h4>
+                                    <p>No particular entity or party can regulate this project, this token belongs
+                                        entirely to us all, from all of us to
+                                        humanity.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="feature__item">
                             <div class="feature__item-inner">
                                 <div class="feature__item-thumb">
-                                    <i class="fa-solid fa-gift fa-5x"></i>
+                                    <i class="fa-solid fa-lock fa-5x"></i>
                                 </div>
                                 <div class="feature__item-content">
-                                    <h4>Early Bonus</h4>
-                                    <p>Lorem ipsum dolor sit amet, conse ctetur adipisir cing elit. Totam, etem aliquam
-                                        liq.
+                                    <h4>Liquidity Locked Forever</h4>
+                                    <p>liquidity of $plstn we lock forever to prove that this token was purely created
+                                        by the community for care.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="feature__item">
                             <div class="feature__item-inner">
                                 <div class="feature__item-thumb">
-                                    <i class="fa-solid fa-universal-access fa-5x"></i>
+                                    <i class="fa-solid fa-chart-line fa-5x"></i>
                                 </div>
                                 <div class="feature__item-content">
-                                    <h4>Universal Access</h4>
-                                    <p>Lorem ipsum dolor sit amet, conse ctetur adipisir cing elit. Totam, etem aliquam
-                                        liq.
+                                    <h4>Token Allocation</h4>
+                                    <p>There's no token allocation to anybody, either a developer or a particular
+                                        community, 100% of the supply of $PLSTN we'll
+                                        release to the market.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="feature__item">
                             <div class="feature__item-inner">
                                 <div class="feature__item-thumb">
-                                    <i class="fa-solid fa-wallet fa-5x"></i>
+                                    <i class="fa-solid fa-sack-dollar fa-5x"></i>
                                 </div>
                                 <div class="feature__item-content">
-                                    <h4>Low Cost</h4>
-                                    <p>Lorem ipsum dolor sit amet, conse ctetur adipisir cing elit. Totam, etem aliquam
-                                        liq.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="feature__item">
-                            <div class="feature__item-inner">
-                                <div class="feature__item-thumb">
-                                    <i class="fa-solid fa-file-shield fa-5x"></i>
-                                </div>
-                                <div class="feature__item-content">
-                                    <h4>Secure Storage</h4>
-                                    <p>Lorem ipsum dolor sit amet, conse ctetur adipisir cing elit. Totam, etem aliquam
-                                        liq.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="feature__item">
-                            <div class="feature__item-inner">
-                                <div class="feature__item-thumb">
-                                    <i class="fa-solid fa-money-bill-trend-up fa-5x"></i>
-                                </div>
-                                <div class="feature__item-content">
-                                    <h4>Several Profit</h4>
-                                    <p>Lorem ipsum dolor sit amet, conse ctetur adipisir cing elit. Totam, etem aliquam
-                                        liq.
+                                    <h4>Tax Allocated To Palestinians</h4>
+                                    <p>100% of the transaction tax will be allocated entirely to the Palestinians, we
+                                        have formally cooperated with several
+                                        related parties, evidence and documentation will be published on our.
                                     </p>
                                 </div>
                             </div>
@@ -315,7 +382,7 @@
         <div class="container">
             <div class="section-header section-header--middle">
                 <div class="title-label">Exclusive</div>
-                <h3>Services We Offer</h3>
+                <h3>Our Goals</h3>
             </div>
             <div class="service__wrapper">
                 <div class="row g-5 align-items-center justify-content-center">
@@ -325,13 +392,11 @@
                             <div class="service__item" data-aos="fade-right" data-aos-duration="1000">
                                 <div class="service__item-inner">
                                     <div class="service__item-thumb line-1">
-                                        <i class="fa-solid fa-money-bill-transfer"></i>
+                                        <i class="fa-solid fa-burger"></i>
                                     </div>
                                     <div class="service__item-content">
-                                        <h4>Money transfer</h4>
-                                        <p>Lorem Ipsum available, but the
-                                            majority have suffered alteration
-                                            in some form, by injected</p>
+                                        <h4>FOOD</h4>
+                                        <p>Food aid for Palestine</p>
                                     </div>
                                 </div>
                             </div>
@@ -341,23 +406,8 @@
                                         <i class="fa-solid fa-house-medical"></i>
                                     </div>
                                     <div class="service__item-content">
-                                        <h4>Healthcare</h4>
-                                        <p>Lorem Ipsum available, but the
-                                            majority have suffered alteration
-                                            in some form, by injected</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="service__item" data-aos="fade-up-right" data-aos-duration="1000">
-                                <div class="service__item-inner">
-                                    <div class="service__item-thumb line-2">
-                                        <i class="fa-solid fa-money-check-dollar"></i>
-                                    </div>
-                                    <div class="service__item-content">
-                                        <h4>Fintech</h4>
-                                        <p>Lorem Ipsum available, but the
-                                            majority have suffered alteration
-                                            in some form, by injected</p>
+                                        <h4>MEDICINE</h4>
+                                        <p>participate in providing necessary medical needs</p>
                                     </div>
                                 </div>
                             </div>
@@ -366,42 +416,25 @@
 
                     <div class="col-lg-4 col-md-6 order-lg-3">
                         <div class="service__part-1">
-                            <div class="service__item" data-aos="fade-left" data-aos-duration="1000">
-                                <div class="service__item-inner service__item-inner--reverse">
-                                    <div class="service__item-thumb line-3">
-                                        <i class="fa-solid fa-truck-fast"></i>
+                            <div class="service__item" data-aos="fade-up-left" data-aos-duration="1000">
+                                <div class="service__item-inner  service__item-inner--reverse">
+                                    <div class="service__item-thumb line-4">
+                                        <i class="fa-solid fa-droplet"></i>
                                     </div>
                                     <div class="service__item-content">
-                                        <h4>Transportation</h4>
-                                        <p>Lorem Ipsum available, but the
-                                            majority have suffered alteration
-                                            in some form, by injected</p>
+                                        <h4>WATER</h4>
+                                        <p>Help meet water needs</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="service__item" data-aos="fade-up-left" data-aos-duration="1000">
                                 <div class="service__item-inner  service__item-inner--reverse">
                                     <div class="service__item-thumb line-4">
-                                        <i class="fa-solid fa-school"></i>
+                                        <i class="fa-solid fa-tents"></i>
                                     </div>
                                     <div class="service__item-content">
-                                        <h4>Edu Tech</h4>
-                                        <p>Lorem Ipsum available, but the
-                                            majority have suffered alteration
-                                            in some form, by injected</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="service__item" data-aos="fade-up-left" data-aos-duration="1000">
-                                <div class="service__item-inner  service__item-inner--reverse">
-                                    <div class="service__item-thumb line-4">
-                                        <i class="fa-solid fa-gamepad"></i>
-                                    </div>
-                                    <div class="service__item-content">
-                                        <h4>Game Dev</h4>
-                                        <p>Lorem Ipsum available, but the
-                                            majority have suffered alteration
-                                            in some form, by injected</p>
+                                        <h4>SHELTER</h4>
+                                        <p>Providing shelter for needs in Palestine</p>
                                     </div>
                                 </div>
                             </div>
@@ -409,7 +442,7 @@
                     </div>
                     <div class="col-lg-4 order-lg-2">
                         <div class="service__image text-center">
-                            <img src="assets/images/service/01.png" alt="Service Image">
+                            <img src="assets/images/banner/PLSTN.png" style="border-radius: 10px;" alt="Service Image">
                         </div>
                     </div>
                 </div>
@@ -426,34 +459,21 @@
         <div class="container">
             <div class="counter__wrapper" data-aos="fade-up" data-aos-duration="1000">
                 <div class="row g-5 justify-content-center align-items-center">
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-8 col-sm-6">
                         <div class="counter__item">
-                            <h3>$<span data-purecounter-start="0" data-purecounter-end="565"
-                                    class="purecounter">565</span>M</h3>
-                            <p>Quarterly volume traded</p>
+                            <h3>Nothing to see here - yet</h3>
+                            <p>When they Tweet, their Tweets will show up here.Tweets from @Crypto4palestin</p>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="counter__item">
-                            <h3><span data-purecounter-start="0" data-purecounter-end="120"
-                                    class="purecounter">120</span>M+</h3>
-                            <p>Accredited investors</p>
+                            <a target="_blank"
+                                href="https://twitter.com/Crypto4palestin?ref_src=twsrc%5Etfw%7Ctwcamp%5Eembeddedtimeline%7Ctwterm%5Escreen-name%3ACrypto4palestin%7Ctwcon%5Es1"
+                                class="default-btn default-btn__large move-right">
+                                <span>View on twitter</span> </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="counter__item">
-                            <h3><span data-purecounter-start="0" data-purecounter-end="100"
-                                    class="purecounter">100</span>+</h3>
-                            <p>Countries Supported</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="counter__item">
-                            <h3><span data-purecounter-start="0" data-purecounter-end="65"
-                                    class="purecounter">65</span>M</h3>
-                            <p>Varified User</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -467,80 +487,56 @@
             <div class="section-header section-header--middle">
                 <div class="title-label">Journey</div>
                 <h3>Our Roadmap</h3>
-                <p>Learning how cryptocurrency works is like learning a new language
-                    it is incredibly difficult at the beginning</p>
             </div>
             <div class="roadmap__wrapper">
                 <div class="row gy-5 mb-5 mb-lg-0">
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="roadmap__item" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="roadmap__item-inner roadmap__item-inner--vertical-line">
+                            <div class="roadmap__item-inner">
                                 <div class="roadmap__item-year">
-                                    <h4>Jan 2022</h4>
-                                    <img src="assets/images/roadmap/arrow-icon.svg" alt="Arrow Icon">
+                                    <h4>PHASE 1</h4>
+
                                 </div>
                                 <div class="roadmap__item-content">
                                     <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
                                     <div class="roadmap__item-text">
-                                        <h6>Concept</h6>
-                                        <p>Lorem Ipsum available, but
-                                            the majority have</p>
+                                        <h6>$PLSTN LAUNCH</h6>
+                                        <p>Launching $PLSTN</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="roadmap__item" data-aos="fade-up" data-aos-duration="1500">
-                            <div class="roadmap__item-inner roadmap__item-inner--vertical-line">
+                            <div class="roadmap__item-inner">
                                 <div class="roadmap__item-year">
-                                    <h4>Feb 2022</h4>
-                                    <img src="assets/images/roadmap/arrow-icon.svg" alt="Arrow Icon">
+                                    <h4>PHASE 2</h4>
+
                                 </div>
                                 <div class="roadmap__item-content">
                                     <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
                                     <div class="roadmap__item-text">
-                                        <h6>Research</h6>
-                                        <p>Lorem Ipsum available, but
-                                            the majority have</p>
+                                        <h6>DONATION PALESTINE</h6>
+                                        <p>Donation every month</p>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="roadmap__item" data-aos="fade-up" data-aos-duration="2000">
-                            <div class="roadmap__item-inner roadmap__item-inner--vertical-line">
+                            <div class="roadmap__item-inner">
                                 <div class="roadmap__item-year">
-                                    <h4>March 2022</h4>
-                                    <img src="assets/images/roadmap/arrow-icon.svg" alt="Arrow Icon">
-                                </div>
-                                <div class="roadmap__item-content">
-                                    <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
-                                    <div class="roadmap__item-text">
-                                        <h6>Token Sale</h6>
-                                        <p>Lorem Ipsum available, but
-                                            the majority have</p>
-                                    </div>
-                                </div>
-                            </div>
+                                    <h4>PHASE 3</h4>
 
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="roadmap__item" data-aos="fade-up" data-aos-duration="2500">
-                            <div class="roadmap__item-inner roadmap__item-inner--vertical-line">
-                                <div class="roadmap__item-year">
-                                    <h4>April 2022</h4>
-                                    <img src="assets/images/roadmap/arrow-icon.svg" alt="Arrow Icon">
                                 </div>
                                 <div class="roadmap__item-content">
                                     <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
                                     <div class="roadmap__item-text">
-                                        <h6>Pre Sale</h6>
-                                        <p>Lorem Ipsum available, but
-                                            the majority have</p>
+                                        <h6>FREE PALESTINE!</h6>
+                                        <p>Crypto for palestine</p>
                                     </div>
                                 </div>
                             </div>
@@ -548,730 +544,206 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="roadmap__upcoming-item" data-aos="fade-up" data-aos-duration="500">
-                            <div class="roadmap__item-inner roadmap__item-inner--horiz-line">
-                                <div class="roadmap__item-year">
-                                    <h4>Jan-Dec 2024</h4>
-                                    <img src="assets/images/roadmap/arrow-icon.svg" alt="Arrow Icon">
-                                </div>
-                                <div class="roadmap__item-content">
-                                    <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
-                                    <div class="roadmap__item-text">
-                                        <h6>Coming soon</h6>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
     <!-- ==========>> Roadmap Section Ends Here <<========== -->
 
 
-    <!-- ==========>> Document Section start Here <<========== -->
-    <section class="document padding-top gradient-bg" id="document">
-        <div class="container">
-            <div class="document__wrapper">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
-                        <div class="section-header">
-                            <div class="title-label">White paper</div>
-                            <h3> Ours <span class="color--theme-color">Documents</span>
-                            </h3>
-                        </div>
-                        <div class="document__content">
-                            <p>Lorem Ipsum available, but the majority have suffered alteration
-                                in some form, by injected humour, or randomised words which
-                                don't look even slightly believable.</p>
-                            <div class="document__list-wrapper">
-                                <div class="row g-4">
-                                    <div class="col-lg-6">
-                                        <ul class="document__list">
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <i class="fa-solid fa-circle-check"></i>
-                                                <p>White Paper</p>
-                                            </li>
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <i class="fa-solid fa-circle-check"></i>
-                                                <p>Terms of Coin Sale</p>
-                                            </li>
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <i class="fa-solid fa-circle-check"></i>
-                                                <p>Privacy & Policy</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <ul class="document__list">
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <i class="fa-solid fa-circle-check"></i>
-                                                <p>Crypto Paper</p>
-                                            </li>
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <i class="fa-solid fa-circle-check"></i>
-                                                <p>Discrypto Doc</p>
-                                            </li>
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <i class="fa-solid fa-circle-check"></i>
-                                                <p>Crypto Trade</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#" class="default-btn default-btn--move-bottom"><span>Download </span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="document__thumb" data-aos="fade-up" data-aos-duration="1000">
-                            <img src="assets/images/document/01.png" alt="document image">
-                            <div class="shape-1"> <img src="assets/images/document/shape-1.png" alt="shape images">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ==========>> Document Section Ends Here <<========== -->
 
 
     <!-- ==========>> Team Section start Here <<========== -->
     <section class="team padding-top padding-bottom shape-1r" id="team">
         <div class="container">
             <div class="section-header section-header--middle">
-                <div class="title-label">Our team</div>
-                <h3>Awesome Members</h3>
+                <h3>TOKENOMICS</h3>
+                <div class="title-label">Token supply 1.000.000.000</div>
             </div>
-            <div class="team__wrapper">
-                <div class="row justify-content-center g-4">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team__item" data-aos="fade-up" data-aos-duration="800">
-                            <div class="team__thumb">
-                                <img src="assets/images/team/01.jpg" alt="Team Member Image">
-                            </div>
-                            <div class="team__content">
-                                <ul class="social">
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-twitter"></i></a>
-                                    </li>
+            <div id="chartdiv"></div>
+        </div>
+    </section>
+    <!-- ==========>> Team Section Ends Here <<========== -->
 
-                                </ul>
-                                <h4><a href="#">David Warner</a></h4>
-                                <p>Co-Founder</p>
+    <!-- ==========>> Document Section start Here <<========== -->
+    <section class="document padding-top gradient-bg mb-5" id="document">
+        <div class="container">
+            <div class="document__wrapper">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="section-header">
+                            <div class="title-label">Join Us</div>
+                            <h3> JOIN OUR <span class="color--theme-color">COMMUNITY</span>
+                            </h3>
+                        </div>
+                        <div class="document__content">
+                            <p>Follow our social media.</p>
+                            <div class="document__list-wrapper">
+                                <div class="row g-4">
+                                    <div class="col-lg-6">
+                                        <ul class="document__list">
+                                            <a href="https://www.instagram.com/crypto4palestin" target="_blank"
+                                                class="pb-3">
+                                                <li class="document__list-item d-flex flex-wrap align-items-center">
+                                                    <i class="fa-brands fa-instagram"></i>
+                                                    <p>Instagram</p>
+                                                </li>
+                                            </a>
+                                            <a href="https://t.me/plstnchannel" target="_blank" class="pb-3">
+                                                <li class="document__list-item d-flex flex-wrap align-items-center">
+                                                    <i class="fa-brands fa-telegram"></i>
+                                                    <p>Telegram</p>
+                                                </li>
+                                            </a>
+                                            <a href="https://twitter.com/crypto4palestin" target="_blank" class="pb-3">
+                                                <li class="document__list-item d-flex flex-wrap align-items-center">
+                                                    <i class="fa-brands fa-twitter"></i>
+                                                    <p>Twitter</p>
+                                                </li>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <ul class="document__list">
+                                            <a href="https://cryptoforpalestine.vercel.app/" target="_blank"
+                                                class="pb-3">
+                                                <li class="document__list-item d-flex flex-wrap align-items-center">
+                                                    <i class="fa-brands fa-medium"></i>
+                                                    <p>Medium</p>
+                                                </li>
+                                            </a>
+                                            <a href="https://cryptoforpalestine.vercel.app/" target="_blank"
+                                                class="pb-3">
+                                                <li class="document__list-item d-flex flex-wrap align-items-center">
+                                                    <i class="fa-brands fa-github"></i>
+                                                    <p>Github</p>
+                                                </li>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
+                            <!-- <a href="#" class="default-btn default-btn--move-bottom"><span>Download </span></a> -->
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team__item" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="team__thumb">
-                                <img src="assets/images/team/02.jpg" alt="Team Member Image">
-                            </div>
-                            <div class="team__content">
-                                <ul class="social">
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-twitter"></i></a>
-                                    </li>
-
-                                </ul>
-                                <h4><a href="#">Chris Hales</a></h4>
-                                <p>UI/UX Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team__item" data-aos="fade-up" data-aos-duration="1500">
-                            <div class="team__thumb">
-                                <img src="assets/images/team/03.jpg" alt="Team Member Image">
-                            </div>
-                            <div class="team__content">
-                                <ul class="social">
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-twitter"></i></a>
-                                    </li>
-
-                                </ul>
-                                <h4><a href="#">Jhon Doe</a></h4>
-                                <p>Marketing Manager</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="team__item" data-aos="fade-up" data-aos-duration="1500">
-                            <div class="team__thumb">
-                                <img src="assets/images/team/04.jpg" alt="Team Member Image">
-                            </div>
-                            <div class="team__content">
-                                <ul class="social">
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="#" class="social__link"><i class="fab fa-twitter"></i></a>
-                                    </li>
-
-                                </ul>
-                                <h4><a href="#">Evan Young</a></h4>
-                                <p>Advisor </p>
-                            </div>
+                    <div class="col-lg-6">
+                        <div class="document__thumb" data-aos="fade-up" data-aos-duration="1000">
+                            <img src="assets/images/banner/PLSTN.jpg" alt="document image">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </section>
-    <!-- ==========>> Team Section Ends Here <<========== -->
-
+    <!-- ==========>> Document Section Ends Here <<========== -->
 
 
     <!-- ==========>> faq Section start Here <<========== -->
-    <section class="faq padding-bottom shape-1r" id="faq">
+    <section class="faq padding-bottom shape-1r mt-5" id="faq">
         <div class="container">
-            <div class="section-header section-header--middle">
+            <div class="section-header section-header--middle mt-5">
                 <div class="title-label">faq</div>
                 <h3>We got answers</h3>
             </div>
-            <div class="faq__wrapper" data-aos="fade-up" data-aos-duration="1000">
-                <ul class="faq__tab nav nav-pills mb-5" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-general-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-general" type="button" role="tab" aria-controls="pills-general"
-                            aria-selected="true">General Questions</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-token-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-token" type="button" role="tab" aria-controls="pills-token"
-                            aria-selected="false">Token Sales</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-investor-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-investor" type="button" role="tab" aria-controls="pills-investor"
-                            aria-selected="false">Investor Guides</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-security-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-security" type="button" role="tab" aria-controls="pills-security"
-                            aria-selected="false">Security</button>
-                    </li>
-                </ul>
-                <div class="tab-content faq__content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-general" role="tabpanel"
-                        aria-labelledby="pills-general-tab">
-                        <div class="row gy-3 gx-5">
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionGeneral1">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general1-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#general1-collapseOne"
-                                                aria-expanded="false" aria-controls="general1-collapseOne">
-                                                Is cryptocurrency used for illegal activities?
-                                            </button>
-                                        </h6>
-                                        <div id="general1-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="general1-headingOne" data-bs-parent="#accordionGeneral1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#general-collapseTwo" aria-expanded="false"
-                                                aria-controls="general-collapseTwo">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="general-collapseTwo" class="accordion-collapse collapse show"
-                                            aria-labelledby="general-headingTwo" data-bs-parent="#accordionGeneral1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#general-collapseThree"
-                                                aria-expanded="false" aria-controls="general-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="general-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="general-headingThree" data-bs-parent="#accordionGeneral1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+            <div class="row gy-3 gx-5">
+                <div class="col-lg-6">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Accordion Item #1
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                                    <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionGeneral2">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general2-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#general2-collapseOne"
-                                                aria-expanded="false" aria-controls="general2-collapseOne">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="general2-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="general2-headingOne" data-bs-parent="#accordionGeneral2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general2-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#general2-collapseTwo"
-                                                aria-expanded="false" aria-controls="general2-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="general2-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="general2-headingTwo" data-bs-parent="#accordionGeneral2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#general2-collapseThree" aria-expanded="false"
-                                                aria-controls="general2-collapseThree">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="general2-collapseThree" class="accordion-collapse collapse show"
-                                            aria-labelledby="general2-headingThree" data-bs-parent="#accordionGeneral2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    Accordion Item #2
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                                    <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being
+                                    filled with some actual content.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    Accordion Item #3
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                                    <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting
+                                    happening here in terms of content, but just filling up the space to make it look, at least at first
+                                    glance, a bit more representative of how this would look in a real-world application.</div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="pills-token" role="tabpanel" aria-labelledby="pills-token-tab">
-                        <div class="row gy-3 gx-5">
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionToken1">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="token1-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#token1-collapseOne"
-                                                aria-expanded="false" aria-controls="token1-collapseOne">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="token1-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="token1-headingOne" data-bs-parent="#accordionToken1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="token-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#token-collapseTwo" aria-expanded="false"
-                                                aria-controls="token-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="token-collapseTwo" class="accordion-collapse collapse show"
-                                            aria-labelledby="token-headingTwo" data-bs-parent="#accordionToken1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="token-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#token-collapseThree"
-                                                aria-expanded="false" aria-controls="token-collapseThree">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="token-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="token-headingThree" data-bs-parent="#accordionToken1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionToken2">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="token2-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#token2-collapseOne"
-                                                aria-expanded="false" aria-controls="token2-collapseOne">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="token2-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="token2-headingOne" data-bs-parent="#accordionToken2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="token2-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#token2-collapseTwo"
-                                                aria-expanded="false" aria-controls="token2-collapseTwo">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="token2-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="token2-headingTwo" data-bs-parent="#accordionToken2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="token2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#token2-collapseThree" aria-expanded="false"
-                                                aria-controls="token2-collapseThree">
-                                                Is cryptocurrency used for illegal activities?
-                                            </button>
-                                        </h6>
-                                        <div id="token2-collapseThree" class="accordion-collapse collapse show"
-                                            aria-labelledby="token2-headingThree" data-bs-parent="#accordionToken2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Accordion Item #1
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                                    <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-investor" role="tabpanel" aria-labelledby="pills-investor-tab">
-                        <div class="row gy-3 gx-5">
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionInvestor1">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor1-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#investor1-collapseOne"
-                                                aria-expanded="false" aria-controls="investor1-collapseOne">
-                                                Is cryptocurrency used for illegal activities?
-                                            </button>
-                                        </h6>
-                                        <div id="investor1-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="investor1-headingOne" data-bs-parent="#accordionInvestor1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#investor-collapseTwo" aria-expanded="false"
-                                                aria-controls="investor-collapseTwo">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="investor-collapseTwo" class="accordion-collapse collapse show"
-                                            aria-labelledby="investor-headingTwo" data-bs-parent="#accordionInvestor1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#investor-collapseThree"
-                                                aria-expanded="false" aria-controls="investor-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="investor-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="investor-headingThree"
-                                            data-bs-parent="#accordionInvestor1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionInvestor2">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor2-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#investor2-collapseOne"
-                                                aria-expanded="false" aria-controls="investor2-collapseOne">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="investor2-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="investor2-headingOne" data-bs-parent="#accordionInvestor2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor2-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#investor2-collapseTwo"
-                                                aria-expanded="false" aria-controls="investor2-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="investor2-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="investor2-headingTwo" data-bs-parent="#accordionInvestor2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#investor2-collapseThree" aria-expanded="false"
-                                                aria-controls="investor2-collapseThree">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="investor2-collapseThree" class="accordion-collapse collapse show"
-                                            aria-labelledby="investor2-headingThree"
-                                            data-bs-parent="#accordionInvestor2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    Accordion Item #2
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                                    <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being
+                                    filled with some actual content.</div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-security" role="tabpanel" aria-labelledby="pills-security-tab">
-                        <div class="row gy-3 gx-5">
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionSecurity1">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security1-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security1-collapseOne"
-                                                aria-expanded="false" aria-controls="security1-collapseOne">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="security1-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="security1-headingOne" data-bs-parent="#accordionSecurity1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#security-collapseTwo" aria-expanded="false"
-                                                aria-controls="security-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="security-collapseTwo" class="accordion-collapse collapse show"
-                                            aria-labelledby="security-headingTwo" data-bs-parent="#accordionSecurity1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security-collapseThree"
-                                                aria-expanded="false" aria-controls="security-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="security-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="security-headingThree"
-                                            data-bs-parent="#accordionSecurity1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionSecurity2">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security2-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security2-collapseOne"
-                                                aria-expanded="false" aria-controls="security2-collapseOne">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="security2-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="security2-headingOne" data-bs-parent="#accordionSecurity2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security2-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security2-collapseTwo"
-                                                aria-expanded="false" aria-controls="security2-collapseTwo">
-                                                What is Crypto?
-                                            </button>
-                                        </h6>
-                                        <div id="security2-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="security2-headingTwo" data-bs-parent="#accordionSecurity2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#security2-collapseThree" aria-expanded="false"
-                                                aria-controls="security2-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="security2-collapseThree" class="accordion-collapse collapse show"
-                                            aria-labelledby="security2-headingThree"
-                                            data-bs-parent="#accordionSecurity2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    Accordion Item #3
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                                    <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting
+                                    happening here in terms of content, but just filling up the space to make it look, at least at first
+                                    glance, a bit more representative of how this would look in a real-world application.</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+        </div>
         </div>
     </section>
     <!-- ==========>> faq Section Ends Here <<========== -->
@@ -1279,7 +751,7 @@
 
 
     <!-- ==========>> Contact Section start Here <<========== -->
-    <section class="contact padding-bottom" id="contact">
+    <!-- <section class="contact padding-bottom" id="contact">
         <div class="container">
             <div class="section-header section-header--middle" data-aos="fade-up" data-aos-duration="1000">
                 <div class="title-label">Contact</div>
@@ -1288,7 +760,8 @@
             <div class="contact__wrapper" data-aos="fade-up" data-aos-duration="1500">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <form action="https://template.discretedev.com/html/discrypto-demo/discrypto-light/contact.php" method="post" class="contact__form" id="contact-form">
+                        <form action="https://template.discretedev.com/html/discrypto-demo/discrypto-light/contact.php"
+                            method="post" class="contact__form" id="contact-form">
                             <div class="row g-4">
                                 <div class="col-md-6">
                                     <div class="input-group">
@@ -1340,7 +813,7 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- ==========>> Contact Section Ends Here <<========== -->
 
 
@@ -1374,99 +847,25 @@
 
 
     <!-- ==========>> Footer Section start Here <<========== -->
-    <footer class="footer">
+    <footer class="footer mt-5">
         <div class="container">
-            <div class="footer__bottom padding-top padding-bottom">
-                <div class="row g-5">
-                    <div class="col-lg-5">
-                        <div class="footer__about">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Discrypto"></a>
-                            <p>Lorem Ipsum available, but the majority
-                                have suffered alteration in some form
-                                by injected humour, or randomised words
-                                which don't look even.</p>
-                            <div class="footer__social d-flex align-items-center">
-                                <span>Follow Us:</span>
 
-                                <ul class="footer__social-list d-flex align-items-center">
-                                    <li class="footer__social-item"><a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li class="footer__social-item"><a href="#"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li class="footer__social-item"><a href="#"><i class="fab fa-instagram"></i></a>
-                                    </li>
-                                    <li class="footer__social-item"><a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="footer__link-group">
-                            <div class="row g-5">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="footer__title">
-                                        <h5>Our Company</h5>
-                                    </div>
-                                    <ul class="footer__link-list">
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Bitcoin</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Crypto</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> About Company</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Features</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Top Investor</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Faq</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="footer__title">
-                                        <h5>Category</h5>
-                                    </div>
-                                    <ul class="footer__link-list">
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Crypto</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Lifestyle</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Bitcoin</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Destination</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> igo</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="footer__title">
-                                        <h5>Quick Link</h5>
-                                    </div>
-                                    <ul class="footer__link-list">
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Dashboard</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Hypeplan</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Terms & condition</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Bitcoin</a></li>
-                                        <li class="footer__link-item"><a href="#"><i
-                                                    class="fas fa-angle-double-right"></i> Privacy & Policy</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="footer__copyright text-center">
+                <p class="mb-0 text-center">
+                    <a href="index.html"><img src="assets/images/logo/logo.png" alt="Discrypto"></a>
+                <div class="mt-4">
+                    <a class="p-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="p-3" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="p-3" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="p-3" href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
+                </p>
             </div>
             <div class="footer__copyright">
                 <p class="mb-0">
-                    © 2024 All Right Reserved by <a
-                        href="https://www.templatemonster.com/authors/discretedev/">DiscreteDev</a>
+                    © 2024 All Right Reserved
                 </p>
+
             </div>
         </div>
     </footer>
@@ -1485,6 +884,4 @@
 
 </body>
 
-
-<!-- Mirrored from template.discretedev.com/html/discrypto-demo/discrypto-light/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Dec 2023 08:57:33 GMT -->
 </html>
