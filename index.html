@@ -40,66 +40,111 @@
     </style>
 
     <!-- Resources -->
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"
         integrity="sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Chart code -->
     <script>
-        am4core.ready(function () {
+        am5.ready(function () {
 
-            // Themes begin
-            am4core.useTheme(am4themes_animated);
-            // Themes end
+            // Create root element
+            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+            var root = am5.Root.new("chartdiv");
 
-            var chart = am4core.create("chartdiv", am4charts.PieChart3D);
-            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+            // Set themes
+            // https://www.amcharts.com/docs/v5/concepts/themes/
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
 
-            chart.legend = new am4charts.Legend();
+            // Create chart
+            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+            var chart = root.container.children.push(am5percent.PieChart.new(root, {
+                radius: am5.percent(90),
+                innerRadius: am5.percent(50),
+                layout: root.horizontalLayout
+            }));
 
-            chart.data = [
-                {
-                    country: "OPERATIONAL",
-                    litres: 1
-                },
-                {
-                    country: "INSTANT CHARITY (locked)",
-                    litres: 5
-                },
+            // Create series
+            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+            var series = chart.series.push(am5percent.PieSeries.new(root, {
+                name: "Series",
+                valueField: "sales",
+                categoryField: "country"
+            }));
+
+            // Set data
+            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+            series.data.setAll([
                 {
                     country: "FAIRLUNCH & PUBLIC",
-                    litres: 60,
-                },
-                {
-                    country: "MARKETING (locked)",
-                    litres: 4
+                    sales: 60
                 },
                 {
                     country: "CEX LIQUIDITY (locked)",
-                    litres: 30
+                    sales: 30
                 },
-            ];
+                {
+                    country: "INSTANT CHARITY (locked)",
+                    sales: 5
+                },
+                {
+                    country: "MARKETING (locked)",
+                    sales: 4
+                },
+                {
+                    country: "OPERATIONAL",
+                    sales: 1
+                },
+            ]);
 
-            var series = chart.series.push(new am4charts.PieSeries3D());
-            series.dataFields.value = "litres";
-            series.dataFields.category = "country";
+            // Disabling labels and ticks
+            series.labels.template.set("visible", false);
+            series.ticks.template.set("visible", false);
 
-            // Memberikan warna yang berbeda untuk setiap kategori
-            // series.slices.template.fill = am4core.color("#db2d43"); // Default warna merah
+            // Adding gradients
+            series.slices.template.set("strokeOpacity", 0);
+            series.slices.template.set("fillGradient", am5.RadialGradient.new(root, {
+                stops: [{
+                    brighten: -0.8
+                }, {
+                    brighten: -0.8
+                }, {
+                    brighten: -0.5
+                }, {
+                    brighten: 0
+                }, {
+                    brighten: -0.5
+                }]
+            }));
 
-            // Atur warna berbeda untuk setiap kategori sesuai dengan urutan data
-            series.colors.list = [
-                am4core.color("#000"),
-                am4core.color("#FFD699"),
-                am4core.color("#db2d43"),
-                am4core.color("#5e913c"),
-                am4core.color("#ee7181"),
-            ];
+            // Create legend
+            // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+            var legend = chart.children.push(am5.Legend.new(root, {
+                centerY: am5.percent(50),
+                y: am5.percent(50),
+                layout: root.verticalLayout
+            }));
+            // set value labels align to right
+            legend.valueLabels.template.setAll({ textAlign: "right" })
+            // set width and max width of labels
+            legend.labels.template.setAll({
+                maxWidth: 140,
+                width: 140,
+                oversizedBehavior: "wrap"
+            });
 
-        }); // end am4core.ready()
+            legend.data.setAll(series.dataItems);
+
+
+            // Play initial series animation
+            // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+            series.appear(1000, 100);
+
+        });
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -109,6 +154,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
         integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -235,7 +281,7 @@
                 </div>
                 <style>
                     .partner__slider img {
-                        height: 100px;
+                        height: 70px;
                         /* Sesuaikan tinggi gambar sesuai kebutuhan */
                         width: auto;
                         /* Atur lebar otomatis agar gambar tetap proporsional */
@@ -256,11 +302,6 @@
                             </div>
                             <div class="swiper-slide">
                                 <div class="">
-                                    <img src="assets/images/patnership/coinmarket-cap.png" alt="partner Image">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="">
                                     <img src="assets/images/patnership/dextools.png" alt="partner Image">
                                 </div>
                             </div>
@@ -272,11 +313,6 @@
                             <div class="swiper-slide">
                                 <div class="">
                                     <img src="assets/images/patnership/pancakeswap.png" alt="partner Image">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="">
-                                    <img src="assets/images/patnership/poocoin.png" alt="partner Image">
                                 </div>
                             </div>
                             <div class="swiper-slide">
@@ -299,6 +335,16 @@
                                     <img src="assets/images/patnership/wfp.png" alt="partner Image">
                                 </div>
                             </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/metamask.png" alt="partner Image">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="">
+                                    <img src="assets/images/patnership/safepal.png" alt="partner Image">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -314,8 +360,10 @@
         <div class="container">
             <div class="section-header section-header--middle">
                 <h3>Discrypto Features</h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum voluptatibus consectetur nemo,
-                    asperiores laborum aliquid </p>
+                <p>THE LITTLE PROOF ISN'T JUST TOKEN, IT'S ABOUT HUMANITY</p>
+                <p>We are just a group of people from the crypto community who wanted to channel our passion into
+                    something useful for others,
+                    a little proof of our dedication to this project.</p>
             </div>
             <div class="feature__wrapper">
                 <div class="row g-4">
@@ -397,6 +445,8 @@
             <div class="section-header section-header--middle">
                 <div class="title-label">Exclusive</div>
                 <h3>Our Goals</h3>
+                <h6>ITS JUST NOT ABOUT CRYPTOCURRENCY, ITS ABOUT HUMANITY</h6>
+                <h6>OUR SMALL GOALS & OUR SMALL HOPES IN THIS PROJECT</h6>
             </div>
             <div class="service__wrapper">
                 <div class="row g-5 align-items-center justify-content-center">
@@ -494,7 +544,7 @@
             </div>
             <div class="roadmap__wrapper">
                 <div class="row gy-5 mb-5 mb-lg-0">
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="roadmap__item" data-aos="fade-up" data-aos-duration="1000">
                             <div class="roadmap__item-inner">
                                 <div class="roadmap__item-year">
@@ -504,14 +554,14 @@
                                 <div class="roadmap__item-content">
                                     <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
                                     <div class="roadmap__item-text">
-                                        <h6>$PLSTN LAUNCH</h6>
-                                        <p>Launching $PLSTN</p>
+                                        <h6>CRYPTO FOR PALESTINE DEVELOPMENT</h6>
+                                        <p>BEP-20 smart contract creation & Project Mapping</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="roadmap__item" data-aos="fade-up" data-aos-duration="1500">
                             <div class="roadmap__item-inner">
                                 <div class="roadmap__item-year">
@@ -521,15 +571,15 @@
                                 <div class="roadmap__item-content">
                                     <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
                                     <div class="roadmap__item-text">
-                                        <h6>DONATION PALESTINE</h6>
-                                        <p>Donation every month</p>
+                                        <h6>PROJECT LAUNCH & RENOUNCED CONTRACT</h6>
+                                        <p>$PLSTN token launch & BEP-20 smart contract renounce</p>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="roadmap__item" data-aos="fade-up" data-aos-duration="2000">
                             <div class="roadmap__item-inner">
                                 <div class="roadmap__item-year">
@@ -539,8 +589,28 @@
                                 <div class="roadmap__item-content">
                                     <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
                                     <div class="roadmap__item-text">
-                                        <h6>FREE PALESTINE!</h6>
-                                        <p>Crypto for palestine</p>
+                                        <h6>CREATE $PLSTN COMMUNITY</h6>
+                                        <p>Create $PLSTN Community and introducing this project troughout crypto
+                                            community</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="roadmap__item" data-aos="fade-up" data-aos-duration="2000">
+                            <div class="roadmap__item-inner">
+                                <div class="roadmap__item-year">
+                                    <h4>PHASE 3</h4>
+
+                                </div>
+                                <div class="roadmap__item-content">
+                                    <div class="roadmap__item-icon"><i class="fas fa-check"></i></div>
+                                    <div class="roadmap__item-text">
+                                        <h6>TAX DONATION</h6>
+                                        <p>Donating transaction taxes to palestine in the form of FOOD,MEDICINE,WATER &
+                                            SHELTER</p>
                                     </div>
                                 </div>
                             </div>
@@ -562,7 +632,7 @@
                     <div class="col-lg-8 col-sm-6">
                         <div class="counter__item">
                             <h3>$PLSTN TOKEN INFORMATION</h3>
-                            <p>When they Tweet, their Tweets will show up here.Tweets from @Crypto4palestin</p>
+                            <p>smart contract : 0x4141B9FEa2B18d079dd171438f5bF32117421d83</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
@@ -605,38 +675,34 @@
                             </h3>
                         </div>
                         <div class="document__content">
-                            <p>Follow our social media.</p>
+                            <p>your support means a lot to us and our brothers in Palestine, help us introduce this
+                                project around the world &
+                                cryptospace!.</p>
                             <div class="document__list-wrapper">
                                 <div class="row g-4">
                                     <div class="col-lg-6">
-                                        <ul class="document__list">
-
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <a href="https://www.instagram.com/crypto4palestin" target="_blank"
-                                                    class="default-btn"><span><i class="fa-brands fa-instagram"></i>
-                                                        Instagram</span></a>
-                                            </li>
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <a href="https://t.me/plstnchannel" target="_blank"
-                                                    class="default-btn"><span><i class="fa-brands fa-telegram"></i>
-                                                        Telegram</span></a>
-                                            </li>
-
-                                        </ul>
+                                        <a href="https://www.instagram.com/crypto4palestin" target="_blank"
+                                            class="default-btn w-100"><span style="background-color: #dd2e44;"><i
+                                                    class="fa-brands fa-instagram"></i>
+                                                Instagram</span></a>
                                     </div>
                                     <div class="col-lg-6">
-                                        <ul class="document__list">
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <a href="https://twitter.com/crypto4palestin" target="_blank"
-                                                    class="default-btn"><span><i class="fa-brands fa-twitter"></i>
-                                                        Twitter</span></a>
-                                            </li>
-                                            <li class="document__list-item d-flex flex-wrap align-items-center">
-                                                <a href="https://cryptoforpalestine.vercel.app/" target="_blank"
-                                                    class="default-btn"><span><i class="fa-brands fa-medium"></i>
-                                                        Medium</span></a>
-                                            </li>
-                                        </ul>
+                                        <a href="https://t.me/plstnchannel" target="_blank"
+                                            class="default-btn w-100"><span style="background-color: #dd2e44;"><i
+                                                    class="fa-brands fa-telegram"></i>
+                                                Telegram</span></a>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="https://twitter.com/crypto4palestin" target="_blank"
+                                            class="default-btn w-100"><span style="background-color: #dd2e44;"><i
+                                                    class="fa-brands fa-twitter"></i>
+                                                Twitter</span></a>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="https://cryptoforpalestine.vercel.app/" target="_blank"
+                                            class="default-btn w-100"><span style="background-color: #dd2e44;"><i
+                                                    class="fa-brands fa-medium"></i>
+                                                Medium</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -644,8 +710,32 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
+                        <style>
+                            .document__thumb {
+                                position: relative;
+                                animation: floatUpDown 3s ease-in-out infinite alternate;
+                            }
+
+                            .document__thumb img {
+                                border-radius: 15px;
+                                width: 100%;
+                                /* agar gambar sesuai dengan lebar parent */
+                            }
+
+                            @keyframes floatUpDown {
+                                0% {
+                                    transform: translateY(0);
+                                }
+
+                                100% {
+                                    transform: translateY(-10px);
+                                    /* Sesuaikan dengan seberapa jauh gambar akan naik */
+                                }
+                            }
+                        </style>
                         <div class="document__thumb" data-aos="fade-up" data-aos-duration="1000">
-                            <img src="assets/images/banner/PLSTN.jpg" alt="document image">
+                            <img src="assets/images/banner/PLSTN.jpg" class="shadow-lg" style="border-radius: 15px;"
+                                alt="document image">
                         </div>
                     </div>
                 </div>
@@ -673,17 +763,12 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pills-token-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-token" type="button" role="tab" aria-controls="pills-token"
-                            aria-selected="false">Token Sales</button>
+                            aria-selected="false">How To Buy</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pills-investor-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-investor" type="button" role="tab" aria-controls="pills-investor"
-                            aria-selected="false">Investor Guides</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-security-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-security" type="button" role="tab" aria-controls="pills-security"
-                            aria-selected="false">Security</button>
+                            aria-selected="false">$PLSTN INFORMATION</button>
                     </li>
                 </ul>
                 <div class="tab-content faq__content" id="pills-tabContent">
@@ -697,74 +782,54 @@
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#general1-collapseOne"
                                                 aria-expanded="false" aria-controls="general1-collapseOne">
-                                                Is cryptocurrency used for illegal activities?
+                                                Where to buy Crypto For Palestine token?
                                             </button>
                                         </h6>
                                         <div id="general1-collapseOne" class="accordion-collapse collapse"
                                             aria-labelledby="general1-headingOne" data-bs-parent="#accordionGeneral1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Crypto For Palestine token is available on
+                                                pancakeswap. You can buy / sell Crypto for Palestine token via
+                                                pancakeswap.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#general-collapseTwo" aria-expanded="false"
-                                                aria-controls="general-collapseTwo">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="general-collapseTwo" class="accordion-collapse collapse show"
-                                            aria-labelledby="general-headingTwo" data-bs-parent="#accordionGeneral1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#general-collapseThree"
-                                                aria-expanded="false" aria-controls="general-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="general-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="general-headingThree" data-bs-parent="#accordionGeneral1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionGeneral2">
                                     <div class="accordion-item">
                                         <h6 class="accordion-header" id="general2-headingOne">
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#general2-collapseOne"
                                                 aria-expanded="false" aria-controls="general2-collapseOne">
-                                                How do I make money by trading cryptocurrencies?
+                                                Is there a transaction tax on crypto for palestine tokens?
                                             </button>
                                         </h6>
                                         <div id="general2-collapseOne" class="accordion-collapse collapse"
                                             aria-labelledby="general2-headingOne" data-bs-parent="#accordionGeneral2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Crypto For Palestine token have 2% buy and 3% transaction tax Where
+                                                taxes will be donated to Palestine in the form of
+                                                FOOD,MEDICINE,WATER & SHELTER
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="accordion accordion-flush" id="accordionGeneral2">
+                                    <div class="accordion-item">
+                                        <h6 class="accordion-header" id="general-headingThree">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#general-collapseThree"
+                                                aria-expanded="false" aria-controls="general-collapseThree">
+                                                Who will run Crypto For Palestine token project?
+                                            </button>
+                                        </h6>
+                                        <div id="general-collapseThree" class="accordion-collapse collapse"
+                                            aria-labelledby="general-headingThree" data-bs-parent="#accordionGeneral1">
+                                            <div class="accordion-body">
+                                                Crypto For Palestine is DAO Based project, There's no developer behind
+                                                this project, it's built and run entirely by the
+                                                community for humanitarian action.
                                             </div>
                                         </div>
                                     </div>
@@ -773,37 +838,18 @@
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#general2-collapseTwo"
                                                 aria-expanded="false" aria-controls="general2-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
+                                                Is this project completely decentralized?
                                             </button>
                                         </h6>
                                         <div id="general2-collapseTwo" class="accordion-collapse collapse"
                                             aria-labelledby="general2-headingTwo" data-bs-parent="#accordionGeneral2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                The project has been completely decentralized with smart contracts that
+                                                have been re-nounced and forever liquidity lock.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="general2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#general2-collapseThree" aria-expanded="false"
-                                                aria-controls="general2-collapseThree">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="general2-collapseThree" class="accordion-collapse collapse show"
-                                            aria-labelledby="general2-headingThree" data-bs-parent="#accordionGeneral2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -818,34 +864,29 @@
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#token1-collapseOne"
                                                 aria-expanded="false" aria-controls="token1-collapseOne">
-                                                How to start trading in cryptocurrencies?
+                                                STEP 1
                                             </button>
                                         </h6>
                                         <div id="token1-collapseOne" class="accordion-collapse collapse"
                                             aria-labelledby="token1-headingOne" data-bs-parent="#accordionToken1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Create a DEX Wallet from Trust Wallet or Metamask
                                             </div>
                                         </div>
                                     </div>
                                     <div class="accordion-item">
                                         <h6 class="accordion-header" id="token-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#token-collapseTwo" aria-expanded="false"
-                                                aria-controls="token-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#token-collapseTwo"
+                                                aria-expanded="false" aria-controls="token-collapseTwo">
+                                                STEP 2
                                             </button>
                                         </h6>
-                                        <div id="token-collapseTwo" class="accordion-collapse collapse show"
+                                        <div id="token-collapseTwo" class="accordion-collapse collapse"
                                             aria-labelledby="token-headingTwo" data-bs-parent="#accordionToken1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Impor BNB token from exchange (Binance,Coinbase etc) to your DEX wallet
+                                                address
                                             </div>
                                         </div>
                                     </div>
@@ -854,16 +895,14 @@
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#token-collapseThree"
                                                 aria-expanded="false" aria-controls="token-collapseThree">
-                                                How do I make money by trading cryptocurrencies?
+                                                STEP 3
                                             </button>
                                         </h6>
                                         <div id="token-collapseThree" class="accordion-collapse collapse"
                                             aria-labelledby="token-headingThree" data-bs-parent="#accordionToken1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Open DEX DAPPS and go to <a
+                                                    href="https://pancakeswap.finance/swap?outputCurrency=0x4141B9FEa2B18d079dd171438f5bF32117421d83">https://pancakeswap.finance/swap?outputCurrency=0x4141B9FEa2B18d079dd171438f5bF32117421d83</a>
                                             </div>
                                         </div>
                                     </div>
@@ -876,16 +915,13 @@
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#token2-collapseOne"
                                                 aria-expanded="false" aria-controls="token2-collapseOne">
-                                                How to trade in cryptocurrencies in a safe way?
+                                                STEP 4
                                             </button>
                                         </h6>
                                         <div id="token2-collapseOne" class="accordion-collapse collapse"
                                             aria-labelledby="token2-headingOne" data-bs-parent="#accordionToken2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Set Slippage to 3%
                                             </div>
                                         </div>
                                     </div>
@@ -894,34 +930,28 @@
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#token2-collapseTwo"
                                                 aria-expanded="false" aria-controls="token2-collapseTwo">
-                                                How to start trading in cryptocurrencies?
+                                                STEP 5
                                             </button>
                                         </h6>
                                         <div id="token2-collapseTwo" class="accordion-collapse collapse"
                                             aria-labelledby="token2-headingTwo" data-bs-parent="#accordionToken2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Confirm Transactions
                                             </div>
                                         </div>
                                     </div>
                                     <div class="accordion-item">
                                         <h6 class="accordion-header" id="token2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#token2-collapseThree" aria-expanded="false"
-                                                aria-controls="token2-collapseThree">
-                                                Is cryptocurrency used for illegal activities?
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#token2-collapseThree"
+                                                aria-expanded="false" aria-controls="token2-collapseThree">
+                                                STEP 6
                                             </button>
                                         </h6>
-                                        <div id="token2-collapseThree" class="accordion-collapse collapse show"
+                                        <div id="token2-collapseThree" class="accordion-collapse collapse"
                                             aria-labelledby="token2-headingThree" data-bs-parent="#accordionToken2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                Now you are $PLSTN Holder & has given hope to our brothers in Palestine
                                             </div>
                                         </div>
                                     </div>
@@ -932,41 +962,39 @@
 
                     <div class="tab-pane fade" id="pills-investor" role="tabpanel" aria-labelledby="pills-investor-tab">
                         <div class="row gy-3 gx-5">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="accordion accordion-flush" id="accordionInvestor1">
                                     <div class="accordion-item">
                                         <h6 class="accordion-header" id="investor1-headingOne">
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#investor1-collapseOne"
                                                 aria-expanded="false" aria-controls="investor1-collapseOne">
-                                                Is cryptocurrency used for illegal activities?
+                                                Where we can see the chart?
                                             </button>
                                         </h6>
                                         <div id="investor1-collapseOne" class="accordion-collapse collapse"
                                             aria-labelledby="investor1-headingOne" data-bs-parent="#accordionInvestor1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                we can see Crypto for Palestine chart at :
+                                                <a
+                                                    href="https://www.dextools.io/app/en/bnb/pair-explorer/0xa43f8b5c8eaa5c9fa037da13aae34bc7b4cacc6e">https://www.dextools.io/app/en/bnb/pair-explorer/0xa43f8b5c8eaa5c9fa037da13aae34bc7b4cacc6e</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="accordion-item">
                                         <h6 class="accordion-header" id="investor-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#investor-collapseTwo" aria-expanded="false"
-                                                aria-controls="investor-collapseTwo">
-                                                How to start trading in cryptocurrencies?
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#investor-collapseTwo"
+                                                aria-expanded="false" aria-controls="investor-collapseTwo">
+                                                Where we can see the proof of lifetime liquidity lock?
                                             </button>
                                         </h6>
-                                        <div id="investor-collapseTwo" class="accordion-collapse collapse show"
+                                        <div id="investor-collapseTwo" class="accordion-collapse collapse"
                                             aria-labelledby="investor-headingTwo" data-bs-parent="#accordionInvestor1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                we can see the proof at <a
+                                                    href="https://www.dexanalyzer.io/token/0x4141B9FEa2B18d079dd171438f5bF32117421d83">https://www.dexanalyzer.io/token/0x4141B9FEa2B18d079dd171438f5bF32117421d83</a>
+                                                and via dextools
                                             </div>
                                         </div>
                                     </div>
@@ -975,199 +1003,15 @@
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#investor-collapseThree"
                                                 aria-expanded="false" aria-controls="investor-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
+                                                Where we can see the proof of contract renounced
                                             </button>
                                         </h6>
                                         <div id="investor-collapseThree" class="accordion-collapse collapse"
                                             aria-labelledby="investor-headingThree"
                                             data-bs-parent="#accordionInvestor1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionInvestor2">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor2-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#investor2-collapseOne"
-                                                aria-expanded="false" aria-controls="investor2-collapseOne">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="investor2-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="investor2-headingOne" data-bs-parent="#accordionInvestor2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor2-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#investor2-collapseTwo"
-                                                aria-expanded="false" aria-controls="investor2-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="investor2-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="investor2-headingTwo" data-bs-parent="#accordionInvestor2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="investor2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#investor2-collapseThree" aria-expanded="false"
-                                                aria-controls="investor2-collapseThree">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="investor2-collapseThree" class="accordion-collapse collapse show"
-                                            aria-labelledby="investor2-headingThree"
-                                            data-bs-parent="#accordionInvestor2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-security" role="tabpanel" aria-labelledby="pills-security-tab">
-                        <div class="row gy-3 gx-5">
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionSecurity1">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security1-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security1-collapseOne"
-                                                aria-expanded="false" aria-controls="security1-collapseOne">
-                                                How to start trading in cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="security1-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="security1-headingOne" data-bs-parent="#accordionSecurity1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security-headingTwo">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#security-collapseTwo" aria-expanded="false"
-                                                aria-controls="security-collapseTwo">
-                                                How do I make money by trading cryptocurrencies?
-                                            </button>
-                                        </h6>
-                                        <div id="security-collapseTwo" class="accordion-collapse collapse show"
-                                            aria-labelledby="security-headingTwo" data-bs-parent="#accordionSecurity1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security-collapseThree"
-                                                aria-expanded="false" aria-controls="security-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="security-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="security-headingThree"
-                                            data-bs-parent="#accordionSecurity1">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="accordion accordion-flush" id="accordionSecurity2">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security2-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security2-collapseOne"
-                                                aria-expanded="false" aria-controls="security2-collapseOne">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="security2-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="security2-headingOne" data-bs-parent="#accordionSecurity2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security2-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#security2-collapseTwo"
-                                                aria-expanded="false" aria-controls="security2-collapseTwo">
-                                                What is Crypto?
-                                            </button>
-                                        </h6>
-                                        <div id="security2-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="security2-headingTwo" data-bs-parent="#accordionSecurity2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-header" id="security2-headingThree">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#security2-collapseThree" aria-expanded="false"
-                                                aria-controls="security2-collapseThree">
-                                                How to trade in cryptocurrencies in a safe way?
-                                            </button>
-                                        </h6>
-                                        <div id="security2-collapseThree" class="accordion-collapse collapse show"
-                                            aria-labelledby="security2-headingThree"
-                                            data-bs-parent="#accordionSecurity2">
-                                            <div class="accordion-body">Fundamentally seller sells their currency to
-                                                gain cash and a buyer buys
-                                                expecting hold the currency until value increases in dollar/rupee terms
-                                                In mid-August 202 total market value of all cryptocurrency exceeded
-                                                $2 trillion, with Bitcoin alone making up 44% of that.
+                                            <div class="accordion-body">
+                                                we can see the proof at <a
+                                                    href="https://bscscan.com/tx/0x9402f517d3e56164430ffab4240ea042974283d9ff8d3458bc17a3bae9cf86ee">https://bscscan.com/tx/0x9402f517d3e56164430ffab4240ea042974283d9ff8d3458bc17a3bae9cf86ee</a>
                                             </div>
                                         </div>
                                     </div>
