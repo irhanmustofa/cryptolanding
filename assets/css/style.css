@@ -1869,7 +1869,7 @@ ol {
 .partner__title h3 {
   font-weight: 500;
   max-inline-size: 10ch;
-  font-size: 1.125rem;
+  font-size: 0.8rem;
 }
 @media (min-width: 768px) {
   .partner__title h3 {
@@ -2358,19 +2358,19 @@ ol {
 .footer__social::after {
   height: 1px;
   width: 100%;
-  background-image: linear-gradient(to right, #664efd, rgba(255, 255, 255, 0));
+  background-image: linear-gradient(to right, #fd4e4e, rgba(255, 255, 255, 0));
   top: -30px;
   left: 0;
 }
 .footer__social span {
-  color: #219cfc;
+  color: #dd2e44;
 }
 .footer__social-list {
   gap: 15px;
 }
 .footer__social-item a {
   font-size: 1.125rem;
-  color: #219cfc;
+  color: #dd2e44;
 }
 .footer__social-item a svg {
   -webkit-transition: all 0.3s ease;
