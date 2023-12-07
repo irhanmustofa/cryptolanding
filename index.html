@@ -115,7 +115,29 @@
     <!-- ==========>> Header Section Ends Here <<========== -->
 
 
+    <style>
+        @keyframes colorAnimation {
+            0% {
+                color: #000000;
+                /* Warna awal, misalnya merah */
+            }
 
+            50% {
+                color: #f92c46;
+                /* Warna pertengahan, misalnya hijau */
+            }
+
+            100% {
+                color: #0a783c;
+                /* Warna akhir, misalnya biru */
+            }
+        }
+
+        .color--theme {
+            animation: colorAnimation 5s infinite;
+            /* 2 detik durasi, dan animasi berulang */
+        }
+    </style>
     <!-- ==========>> Banner Section start Here <<========== -->
     <section class="banner banner--two" id="home" style="background-image:url(assets/images/banner/bg2.png)">
         <div class="container">
@@ -124,7 +146,7 @@
                     <div class="col-lg-8">
                         <div class="banner__content text-center" data-aos="fade-right" data-aos-duration="1000">
 
-                            <h1><span class="color--theme-color">$PLSTN</span> CRYPTO FOR PALESTINE</h1>
+                            <h1><span class="color--theme">$PLSTN</span> CRYPTO FOR PALESTINE</h1>
                             <p>$PLSTN Was Created By The Cryptocurrency Community To Devote Concern To The Palestinian
                                 Community, We Have The Principle
                                 That No Matter How Little Of Our Concern Will Mean Much To Them</p>
