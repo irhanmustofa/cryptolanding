@@ -21,11 +21,11 @@ new Chart(myChart, {
         label: "Language Popularity",
         data: chartData.data,
         backgroundColor: [
-          "#cc2129", // Color for "FAIRLAUNCH & PUBLIC"
-          "#0a793a", // Color for "CEX LIQUIDITY (locked)"
-          "#fd9da1", // Color for "INSTANT CHARITY (locked)"
+          "#ff8187", // Color for "FAIRLAUNCH & PUBLIC"
+          "#71db9f", // Color for "CEX LIQUIDITY (locked)"
+          "#8e8e8e", // Color for "INSTANT CHARITY (locked)"
           "#000", // Color for "MARKETING (locked)"
-          "#a4ffaf", // Color for "OPERATIONAL"
+          "#c9b2de", // Color for "OPERATIONAL"
         ],
       },
     ],

@@ -919,6 +919,38 @@ a {
 }
 
 @media (min-width: 1200px) {
+  .shape-11r:after {
+    position: absolute;
+    content: "";
+    background-image: url(../images/shape/graphic.svg);
+    background-size: contain;
+    width: 210px;
+    height: 250px;
+    bottom: 50px;
+    right: 150px;
+    -webkit-animation: light 6s linear infinite alternate;
+    -moz-animation: light 6s linear infinite alternate;
+    -ms-animation: light 6s linear infinite alternate;
+    -o-animation: light 6s linear infinite alternate;
+    animation: light 6s linear infinite alternate;
+  }
+  .shape-11r:before {
+    top: 100px;
+    left: 200px;
+    position: absolute;
+    content: "";
+    box-shadow: inset 0 0 30px rgb(253 78 78 / 10%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    -webkit-animation: floating 6s linear infinite alternate;
+    -moz-animation: floating 6s linear infinite alternate;
+    -ms-animation: floating 6s linear infinite alternate;
+    -o-animation: floating 6s linear infinite alternate;
+    animation: floating 6s linear infinite alternate;
+  }
+}
+@media (min-width: 1200px) {
   .shape-1r:after {
     position: absolute;
     content: "";
