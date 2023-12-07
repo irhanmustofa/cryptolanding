@@ -1,6 +1,6 @@
 const chartData = {
   labels: [
-    "FAIRLUNCH & PUBLIC",
+    "FAIRLAUNCH & PUBLIC",
     "CEX LIQUIDITY (locked)",
     "INSTANT CHARITY (locked)",
     "MARKETING (locked)",
@@ -20,6 +20,13 @@ new Chart(myChart, {
       {
         label: "Language Popularity",
         data: chartData.data,
+        backgroundColor: [
+          "#cc2129", // Color for "FAIRLAUNCH & PUBLIC"
+          "#0a793a", // Color for "CEX LIQUIDITY (locked)"
+          "#fd9da1", // Color for "INSTANT CHARITY (locked)"
+          "#000", // Color for "MARKETING (locked)"
+          "#a4ffaf", // Color for "OPERATIONAL"
+        ],
       },
     ],
   },

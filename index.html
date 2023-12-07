@@ -1072,15 +1072,35 @@
     <!-- ==========>> Footer Section start Here <<========== -->
     <footer class="footer mt-5">
         <div class="container">
+            <style>
+                .footer__about {
+                    position: relative;
+                    animation: moveFooter 1.5s ease infinite;
+                }
+
+                @keyframes moveFooter {
+                    0% {
+                        transform: translateY(0);
+                    }
+
+                    50% {
+                        transform: translateY(-10px);
+                    }
+
+                    100% {
+                        transform: translateY(0);
+                    }
+                }
+            </style>
 
             <div class="footer__bottom padding-top padding-bottom">
                 <div class="row g-5 text-center d-flex justify-content-center">
                     <div class="col-lg-12">
-                        <div class="footer__about p-4" style="background-color: black;border-radius: 20px;box-shadow:0 6px 15px -2px rgba(9, 164, 68, 0.762),
+                        <div class="footer__about p-4" style="background-color: rgb(255, 255, 255);border-radius: 20px;box-shadow:0 6px 15px -2px rgba(9, 164, 68, 0.762),
     0 0 0 1px rgba(255, 0, 0, 0.844);">
                             <!-- <a href="index.html"><img src="assets/images/logo/logo.png" alt="Discrypto"></a> -->
-                            <h3 style="color: #0a783c;">CRYPTO FOR PALESTINE</h3>
-                            <h5 style="color: #ffffff;">ITS JUST NOT ABOUT CRYPTOCURRENCY ITS ABOUT HUMANITY</h5>
+                            <h3 style="color: #cc2129;">CRYPTO FOR PALESTINE</h3>
+                            <h5 style="color: #000000;">ITS JUST NOT ABOUT CRYPTOCURRENCY ITS ABOUT HUMANITY</h5>
                             <h3 style="color: #cc2129;">#FROM COMMUNITY FOR HUMANITY</h3>
                             <div class="">
 
