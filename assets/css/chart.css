@@ -17,7 +17,8 @@
   gap: 24px;
   margin: 0 auto;
   width: fit-content;
-  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 15px -2px rgba(9, 164, 68, 0.762),
+    0 0 0 1px rgba(255, 0, 0, 0.844);
   border-radius: 20px;
   padding: 8px 32px;
   color: #023047;
