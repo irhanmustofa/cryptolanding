@@ -570,6 +570,36 @@
                 <div class="title-label">Token supply 1.000.000.000</div>
             </div>
             <!-- <div id="chartdiv"></div> -->
+            <style>
+                .programming-stats {
+                    width: 80%;
+                    /* Sesuaikan lebar div */
+                    margin: auto;
+                    /* Pusatkan div */
+                }
+
+                .chart-container {
+                    width: 45%;
+                    /* Sesuaikan lebar chart-container */
+                    height: auto;
+                }
+
+                .my-chart {
+                    width: 100%;
+                    /* Sesuaikan lebar canvas chart */
+                    height: 100%;
+                    /* Sesuaikan tinggi canvas chart */
+                }
+
+                @media (max-width: 767px) {
+
+                    .chart-container {
+                        width: 100%;
+                        /* Sesuaikan lebar chart-container */
+                        height: auto;
+                    }
+                }
+            </style>
             <div class="programming-stats row">
                 <div class="chart-container col-lg-6 mx-auto">
                     <canvas class="my-chart"></canvas>
