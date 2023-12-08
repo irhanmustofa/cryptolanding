@@ -1,5 +1,5 @@
 ---
 deployment:
 tasks:
-  - export DEPLOYPATH=/home/usercpanel/public_html/git
-  - /bin/cp -r * $DEPLOYPATH
+  - export DEPLOYPATH=/home/cryphhlr/public_html/git
+  - /bin/cp -R * $DEPLOYPATH
